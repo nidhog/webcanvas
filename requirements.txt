@@ -1,5 +1,10 @@
 dj-database-url==0.4.1
-Django==1.10.4
 gunicorn==19.6.0
 psycopg2==2.6.2
+appdirs==1.4.3
+packaging==16.8
+pyparsing==2.2.0
+
 whitenoise==3.2
+six==1.10.0
+Django==1.10.4
