@@ -8,3 +8,4 @@ pyparsing==2.2.0
 whitenoise==3.2
 six==1.10.0
 Django==1.10.4
+djangorestframework==3.6.3
