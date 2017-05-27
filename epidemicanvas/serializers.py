@@ -13,13 +13,14 @@ class SessionSerializer(serializers.ModelSerializer):
 class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
-        fields = ('id', 'first_name', 'last_name',)
+        fields = ('id', 'email', 'first_name', 'last_name',)
         read_only_fields = ('id',)
 
         def create(self, validated_data):
             return Artist.objects.create(**validated_data)
 
         def update(self, instance, validated_data):
+            instance.email = validated_data.get('email', instance.email)
             instance.first_name = validated_data.get('first_name', instance.first_name)
             instance.last_name = validated_data.get('last_name', instance.last_name)
 

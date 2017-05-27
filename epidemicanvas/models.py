@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Artist(models.Model):
+    email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
 
