@@ -1,6 +1,6 @@
 from django.contrib.auth import update_session_auth_hash
 from rest_framework import serializers
-from .models import Session, Artist
+from .models import Session, Artist, Contributions
 
 
 class SessionSerializer(serializers.ModelSerializer):
@@ -28,3 +28,10 @@ class ArtistSerializer(serializers.ModelSerializer):
 
             update_session_auth_hash(self.context.get('request'), instance)
             return instance
+
+
+class ContributionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contributions
+        fields = ('id', 'session', 'artist', 'image', 'created','updated')
+        read_only_fields = ('id',)

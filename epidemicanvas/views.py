@@ -4,10 +4,15 @@ from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 
 from .models import Session, Artist
-from .serializers import SessionSerializer, ArtistSerializer
+from .serializers import SessionSerializer, ArtistSerializer, ContributionSerializer
 
 
 class SessionViewSet(viewsets.ModelViewSet):
+    queryset = Session.objects.all()
+    serializer_class = SessionSerializer
+
+
+class ContributionViewSet(viewsets.ModelViewSet):
     queryset = Session.objects.all()
     serializer_class = SessionSerializer
 

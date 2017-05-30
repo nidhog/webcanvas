@@ -1,4 +1,5 @@
 from django.db import models
+from .fields import ImageBase64Field
 
 
 class Artist(models.Model):
@@ -29,3 +30,13 @@ class Session(models.Model):
 class Contributions(models.Model):
     session = models.ForeignKey(Session)
     artist = models.ForeignKey(Artist)
+    # add field for storing flattened image in Base64
+    image = ImageBase64Field()
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Contribution"
+        verbose_name_plural = "Contributions"
+
