@@ -12,4 +12,5 @@ Source the local environment
 Run
 `python manage.py runserver`
 
-Deploys to Heroku automatically after pushing to *master*
+Deploys to Heroku automatically after pushing to *master*. Migrations need to be staged. 
+To run the migrations on Heroku: `heroku run python manage.py migrate`
