@@ -8,15 +8,6 @@ class SessionSerializer(serializers.ModelSerializer):
     image = ImageBase64Field(
         max_length=None, use_url=True, default=None
     )
-    print('YOLO')
-
-    def create(self, validated_data):
-        print(validated_data)
-        print('TODOh---------------------')
-        print('TODOh---------------------')
-        print('TODOh---------------------')
-        print('TODOh---------------------')
-        return super(SessionSerializer, self).create(validated_data)
 
     class Meta:
         model = Session

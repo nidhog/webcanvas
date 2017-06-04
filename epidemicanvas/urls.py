@@ -11,5 +11,7 @@ router.register(r'contributions', views.ContributionViewSet)
 
 urlpatterns = [
     url('api/v1/', include(router.urls)),
-    url(r'^', views.index, name='index'),
+    url('api/v1/update_session_image', views.update_image, name='update_session_image'),
+    url('api/v1/update_session/(?P<pk>\d+)/$', views.SessionUpdateName.as_view(), name='update_session'),
+    url(r'^/', views.index, name='index'),
 ]
