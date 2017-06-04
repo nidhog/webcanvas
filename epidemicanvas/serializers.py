@@ -1,12 +1,23 @@
 from django.contrib.auth import update_session_auth_hash
 from rest_framework import serializers
 from .models import Session, Artist, Contributions
+from .fields import ImageBase64Field
 
 
 class SessionSerializer(serializers.ModelSerializer):
+    image = ImageBase64Field(
+        max_length=None, use_url=True, default=None
+    )
+    print('YOLO')
+
+    def create(self, validated_data):
+        print(validated_data)
+        print('TODOh---------------------')
+        return super(SessionSerializer, self).create(validated_data)
+
     class Meta:
         model = Session
-        fields = ('id', 'name', 'artist',)
+        fields = ('id', 'name', 'artist', 'image')
         read_only_fields = ('id',)
 
 

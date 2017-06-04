@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 
-from .models import Session, Artist
+from .models import Session, Artist, Contributions
 from .serializers import SessionSerializer, ArtistSerializer, ContributionSerializer
 
 
@@ -13,8 +13,8 @@ class SessionViewSet(viewsets.ModelViewSet):
 
 
 class ContributionViewSet(viewsets.ModelViewSet):
-    queryset = Session.objects.all()
-    serializer_class = SessionSerializer
+    queryset = Contributions.objects.all()
+    serializer_class = ContributionSerializer
 
 
 class ArtistViewSet(viewsets.ModelViewSet):
