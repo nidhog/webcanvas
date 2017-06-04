@@ -1,6 +1,8 @@
 from django.db import models
-from .fields import ImageBase64Field
+
 from django.utils import timezone
+
+from .fields import ImageBase64Field
 
 
 class Artist(models.Model):
@@ -25,7 +27,7 @@ class Session(models.Model):
     name = models.CharField(max_length=50)
     artist = models.ForeignKey(Artist)
     # add field for storing flattened image in Base64
-    image = ImageBase64Field(default=None, max_length=None, use_url=True)
+    image = models.ImageField(default=None)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

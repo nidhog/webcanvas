@@ -13,6 +13,9 @@ class SessionSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         print(validated_data)
         print('TODOh---------------------')
+        print('TODOh---------------------')
+        print('TODOh---------------------')
+        print('TODOh---------------------')
         return super(SessionSerializer, self).create(validated_data)
 
     class Meta:
