@@ -7,6 +7,7 @@ class Artist(models.Model):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
+    picture = models.ImageField(default=None, null=True)
 
     class Meta:
         verbose_name = "Artist"
@@ -44,4 +45,24 @@ class Contributions(models.Model):
     class Meta:
         verbose_name = "Contribution"
         verbose_name_plural = "Contributions"
+
+
+class Action(models.Model):
+    type = models.CharField(max_length=50)
+    session = models.ForeignKey(Session)
+    artist = models.ForeignKey(Artist)
+    startX = models.IntegerField(default=0)
+    startY = models.IntegerField(default=0)
+    endX = models.IntegerField(default=0)
+    endY = models.IntegerField(default=0)
+    size = models.IntegerField(default=1)
+    color = models.CharField(max_length=50, default='#0f0f0f')
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Action"
+        verbose_name_plural = "Actions"
+
+    def __unicode__(self):
+        return self.name
 

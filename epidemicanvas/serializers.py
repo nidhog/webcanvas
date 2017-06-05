@@ -1,13 +1,10 @@
 from django.contrib.auth import update_session_auth_hash
 from rest_framework import serializers
-from .models import Session, Artist, Contributions
+from .models import Session, Artist, Contributions, Action
 from .fields import ImageBase64Field
 
 
 class SessionSerializer(serializers.ModelSerializer):
-    image = ImageBase64Field(
-        max_length=None, use_url=True, default=None
-    )
 
     class Meta:
         model = Session
@@ -40,3 +37,11 @@ class ContributionSerializer(serializers.ModelSerializer):
         model = Contributions
         fields = ('id', 'session', 'artist', 'image', 'created','updated')
         read_only_fields = ('id',)
+
+
+class ActionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Action
+        fields = ('id', 'type', 'session', 'artist', 'startX', 'startY', 'endX', 'endY', 'created', 'size', 'color')
+        read_only_fields = ('id', 'created')

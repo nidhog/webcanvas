@@ -1,14 +1,14 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views import generic
 
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
-from rest_framework.decorators import detail_route, list_route
+from rest_framework.decorators import detail_route, list_route, api_view
 
 
-from .models import Session, Artist, Contributions
+from .models import Session, Artist, Contributions, Action
 from .fields import ImageBase64Field
-from .serializers import SessionSerializer, ArtistSerializer, ContributionSerializer
+from .serializers import SessionSerializer, ArtistSerializer, ContributionSerializer, ActionSerializer
 
 
 class SessionViewSet(viewsets.ModelViewSet):
@@ -71,6 +71,11 @@ class ContributionViewSet(viewsets.ModelViewSet):
     serializer_class = ContributionSerializer
 
 
+class ActionViewSet(viewsets.ModelViewSet):
+    queryset = Action.objects.all()
+    serializer_class = ActionSerializer
+
+
 class ArtistViewSet(viewsets.ModelViewSet):
     lookup_field = 'first_name'
     queryset = Artist.objects.all()
@@ -107,3 +112,35 @@ def update_image(request):
 
 def index(request):
     return HttpResponse("Epidemic Paint Server.")
+
+
+@api_view(['GET', 'POST'])
+def get_actions(request):
+
+    querydict = request.data
+    last_date = querydict.get('last_created')
+    session_id = querydict.get('session')
+    if last_date and session_id:
+        actions = Action.objects.filter(session=session_id, created__gt=last_date).order_by('created')
+    elif session_id:
+        actions = Action.objects.filter(session=session_id).order_by('created')
+    else:
+        actions = []
+
+    action_list = [
+        {
+            'id' : action.id,
+            'type': action.type,
+            'session': action.session.id,
+            'artist': action.artist.id,
+            'startX': action.startX,
+            'startY': action.startY,
+            'endX': action.endX,
+            'endY': action.endY,
+            'created': action.created,
+            'size': action.size,
+            'color': action.color,
+        }
+        for action in actions
+    ]
+    return JsonResponse({'result': action_list})
