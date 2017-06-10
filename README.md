@@ -3,6 +3,7 @@
 Running on : http://webcanva.herokuapp.com
 
 ## Instructions
+This project is written in Python3.6.1 so please make sure this version is installed on your computer.
 ### Set up the virtual environment
 First install `virtualenv` using pip
 
